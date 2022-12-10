@@ -5,7 +5,7 @@ mongoose.set("strictQuery", true);
 const url = "mongodb://localhost:27017/iNoteBook";
 
 module.exports = mongoConnect = () => {
-  mongoose.connect(url, { useNewUrlParser: true }, () => {
+  mongoose.connect(url, () => {
     console.log("Mongo Connected Successfully");
   });
 };

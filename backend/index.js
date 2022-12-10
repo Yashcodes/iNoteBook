@@ -1,10 +1,12 @@
 const express = require("express");
-const { mongo } = require("mongoose");
 const app = express();
 const port = 3000;
 const mongoConnect = require("./db");
-
+ 
+//! Connect to MongoDB Database
 mongoConnect();
+
+app.use(express.json());
 
 //! Available Routes
 app.use("/api/auth", require("./routes/auth.js"));

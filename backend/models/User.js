@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 
-//! Defining the structure for the user
+//! Defining the structure for the user (Schema)
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-  },
-
+  }, 
+ 
   email: {
     type: String,
     required: true,
