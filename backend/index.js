@@ -2,10 +2,11 @@ const express = require("express");
 const app = express();
 const port = 5000;
 const mongoConnect = require("./db");
- 
+
 //! Connect to MongoDB Database
 mongoConnect();
 
+//! To use json data
 app.use(express.json());
 
 //! Available Routes

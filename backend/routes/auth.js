@@ -2,6 +2,7 @@ const express = require("express");
 const User = require("../models/User");
 const router = express.Router();
 const { body, validationResult } = require("express-validator");
+const bcrypt = require("bcryptjs/dist/bcrypt");
 
 //! Create a User using : POST "api/auth/createuser". No login required
 
@@ -9,7 +10,7 @@ router.post(
   "/createuser",
   [
     //! Validating the inputs of user using express-validator
-    
+
     body("name", "Enter a valid name").isLength({ min: 3 }),
     body("email", "Enter a valid email").isEmail(),
     body("password", "Password must be atleast 8 characters").isLength({
@@ -34,11 +35,16 @@ router.post(
           .json({ error: "Sorry, a user with this email already exists" });
       }
 
+      //* Tut 49 : Hashing the password using bcryptjs
+
+      const salt = await bcrypt.genSalt(10);
+      const securedPass = await bcrypt.hash(req.body.password, salt);
+
       //! Creating a new user
       user = await User.create({
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password,
+        password: securedPass,
       });
 
       res.json(user); //* Sending response to work fine
