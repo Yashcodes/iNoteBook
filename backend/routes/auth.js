@@ -50,14 +50,16 @@ router.post(
         password: securedPass,
       });
 
+      //! Authenticating user by "authentication token" using "JSONWebToken (JWT)" :::: Using authToken here to send the response to user
+
       const data = {
         user: {
           id: user.id,
         },
       };
 
-      const authToken = jwt.sign(data, JWT_SECRET); //* authToken = authentication token to validate user from the server and database
-      console.log("token is" + authToken);
+      const authToken = jwt.sign(data, JWT_SECRET); //* authToken = authentication token to validate user from the server and database :::: Acts synchronously
+      console.log("token is : " + authToken);
 
       // res.json(user); //* Sending response to work fine
       res.json({ authToken });
@@ -65,7 +67,60 @@ router.post(
       //! Catch errors to make app to not crash
     } catch (error) {
       console.error(error.message);
-      res.status(500).send("Some Error Occured");
+      res.status(500).send("Internal Server Error");
+    }
+  }
+);
+
+//! Authenticate a User using : POST "api/auth/login". No login required
+
+router.post(
+  "/login",
+  [ 
+    //? Express-Validator Starts
+    //! Validating the inputs of user using express-validator
+
+    body("email", "Enter a valid email").isEmail(),
+    body("password", "Password cannot be blank").exists(),
+  ],
+  async (req, res) => {
+    //! If there are errors, return Bad Request and the errors
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.status(400).json({ error: errors.array() });
+    }
+    //? Express-Validator ended
+
+    //! Checking that the user is present in the database or not
+
+    const { email, password } = req.body;
+    try {
+      let user = await User.findOne({ email });
+      if (!user) {
+        return res
+          .status(400)
+          .json({ error: "Please try to login with correct credentials." });
+      }
+
+      const comparePassword = await bcrypt.compare(password, user.password);
+
+      if (!comparePassword) {
+        return res
+          .status(400)
+          .json({ error: "Please try to login with correct credentials." });
+      }
+
+      const data = {
+        user: {
+          id: user.id,
+        }, 
+      };
+
+      const authToken = jwt.sign(data, JWT_SECRET);
+      res.send({authToken});
+    } catch (error) {
+      console.log(error.message);
+      res.status(500).send("Internal Server Error");
     }
   }
 );
