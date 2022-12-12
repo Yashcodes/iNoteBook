@@ -14,7 +14,7 @@ app.use("/api/auth", require("./routes/auth.js"));
 app.use("/api/notes", require("./routes/notes.js"));
 
 app.get("/", (req, res) => {
-  res.send("Hello Express...!");
+  res.send("<h1>Hello Express</h1>");
 });
 
 app.listen(port, () => {
