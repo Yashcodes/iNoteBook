@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 
 const JWT_SECRET = "Yashis@agood$boy";
 
+//? ROUTE 1 : USER CREATION, HASHING PASSWORD AND AUTHENTICATION USING "JWT" 
 //! Create a User using : POST "api/auth/createuser". No login required
 
 router.post(
@@ -72,11 +73,12 @@ router.post(
   }
 );
 
+//? ROUTE 2 : USER LOGIN AND AUTHENTICATING USER THROUGH "JWT"
 //! Authenticate a User using : POST "api/auth/login". No login required
 
 router.post(
   "/login",
-  [ 
+  [
     //? Express-Validator Starts
     //! Validating the inputs of user using express-validator
 
@@ -113,11 +115,11 @@ router.post(
       const data = {
         user: {
           id: user.id,
-        }, 
+        },
       };
 
       const authToken = jwt.sign(data, JWT_SECRET);
-      res.send({authToken});
+      res.send({ authToken });
     } catch (error) {
       console.log(error.message);
       res.status(500).send("Internal Server Error");
