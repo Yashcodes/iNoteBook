@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 
 //! Defining the structure for the notes
 const NotesSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+
   title: {
     type: String,
     required: true,
@@ -14,7 +19,7 @@ const NotesSchema = new mongoose.Schema({
 
   tag: {
     type: String,
-    default : "General"
+    default: "General",
   },
 
   date: {
