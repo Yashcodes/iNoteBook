@@ -22,7 +22,7 @@ const NoteState = (props) => {
       __v: 0,
     },
     {
-      _id: "63a5f7636541f5d7bf227677",
+      _id: "63a5f7636541f5d7bf2276464",
       user: "639f596e8693119ad8f53269",
       title: "Practical",
       description: "Write practical 2",
@@ -31,7 +31,7 @@ const NoteState = (props) => {
       __v: 0,
     },
     {
-      _id: "63a5f7636541f5d7bf227677",
+      _id: "63a5f7636541f5d7bf2276568",
       user: "639f596e8693119ad8f53269",
       title: "Practical",
       description: "Write practical 2",
@@ -40,7 +40,7 @@ const NoteState = (props) => {
       __v: 0,
     },
     {
-      _id: "63a5f7636541f5d7bf227677",
+      _id: "63a5f7636541f5d7bf2276678",
       user: "639f596e8693119ad8f53269",
       title: "Practical",
       description: "Write practical 2",
@@ -49,7 +49,7 @@ const NoteState = (props) => {
       __v: 0,
     },
     {
-      _id: "63a5f7636541f5d7bf227677",
+      _id: "63a5f7636541f5d7bf2276345",
       user: "639f596e8693119ad8f53269",
       title: "Practical",
       description: "Write practical 2",
