@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import NoteContext from "./noteContext";
 
 const NoteState = (props) => {
+  const host = "http://localhost:5000";
+
   const notesInitial = [
     {
       _id: "63a5f7486541f5d7bf227675",
@@ -92,7 +94,33 @@ const NoteState = (props) => {
   };
 
   //! Edit a note
-  const editNote = () => {};
+  const editNote = async (id, title, description, tag) => {
+    //* API Call
+
+    const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM5ZjU5NmU4NjkzMTE5YWQ4ZjUzMjY5In0sImlhdCI6MTY3MTM4NzUxNn0.LLfF2jk--h1s3JKat_IGkjUZchHeT10aE2MLaHI7Uzc",
+      },
+      body: JSON.stringify(data),
+    });
+
+    console.log("Editing notes")
+    const json = response.json();
+
+    //?*Logic to edit in client
+    for (let index = 0; index < notes.length; index++) {
+      const note = notes[index];
+
+      if (note._id === id) {
+        (note.title = title),
+          (note.description = description),
+          (note.tag = tag);
+      }
+    }
+  };
 
   return (
     <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote }}>
