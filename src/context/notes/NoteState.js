@@ -64,12 +64,13 @@ const NoteState = (props) => {
   //! Add a note
   const addNote = (title, description, tag) => {
     //TODO : API Call
+    console.log("Adding a new note");
     const note = {
       _id: "63a5f7486541f5d7bf547675",
       user: "639f596e8693119ad8f53269",
-      title: "Wish",
-      description: "Good Morning [ADDED]",
-      tag: "Greeting",
+      title: title,
+      description: description,
+      tag: tag,
       date: "2022-12-23T18:45:28.547Z",
       __v: 0,
     };
