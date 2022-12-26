@@ -83,7 +83,7 @@ const NoteState = (props) => {
     //* API Call
 
     const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         "auth-token":
@@ -94,7 +94,7 @@ const NoteState = (props) => {
 
     console.log("Editing notes");
     // eslint-disable-next-line
-    const json = response.json();
+    const json = await response.json();
 
     //* Logic to edit in client
     for (let index = 0; index < notes.length; index++) {
