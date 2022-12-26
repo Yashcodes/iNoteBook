@@ -59,6 +59,7 @@ const NoteState = (props) => {
   const deleteNote = async (id) => {
     //* API Call
 
+    // eslint-disable-next-line
     const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
       method: "DELETE",
       headers: {

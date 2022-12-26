@@ -1,20 +1,41 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import noteContext from "../context/notes/noteContext";
 import NoteItem from "./NoteItem";
 import AddNote from "./AddNote";
 
 const Notes = () => {
   const context = useContext(noteContext);
-  const { notes, fetchNotes } = context;
+  const { notes, fetchNotes, editNote } = context;
   const ref = useRef(null);
+
+  const [note, setNote] = useState({
+    etitle: "",
+    edescription: "",
+    etag: "default",
+  });
 
   useEffect(() => {
     fetchNotes();
     // eslint-disable-next-line
   }, []);
 
-  const updateNote = (note) => {
+  const updateNote = (currentNote) => {
     ref.current.click();
+    setNote({
+      etitle: currentNote.title,
+      edescription: currentNote.description,
+      etag: currentNote.tag,
+    });
+  };
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    console.log("Updating the note", note);
+    editNote(note._id, note.etitle, note.edescription, note.etag);
+  };
+
+  const handleOnChange = (e) => {
+    setNote({ ...note, [e.target.name]: e.target.value });
   };
 
   return (
@@ -52,7 +73,51 @@ const Notes = () => {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body">...</div>
+            <div className="modal-body">
+              <form action="" className="my-3">
+                <div className="mb-3">
+                  <label htmlFor="title" className="form-label">
+                    Title
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="etitle"
+                    name="etitle"
+                    aria-describedby="emailHelp"
+                    onChange={handleOnChange}
+                    value={note.etitle}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="description" className="form-label">
+                    Description
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="edescription"
+                    name="edescription"
+                    onChange={handleOnChange}
+                    value={note.edescription}
+                  />
+                </div>
+
+                <div className="mb-3">
+                  <label htmlFor="tag" className="form-label">
+                    Tag
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="etag"
+                    name="etag"
+                    onChange={handleOnChange}
+                    value={note.etag}
+                  />
+                </div>
+              </form>
+            </div>
             <div className="modal-footer">
               <button
                 type="button"
@@ -61,8 +126,12 @@ const Notes = () => {
               >
                 Close
               </button>
-              <button type="button" className="btn btn-primary">
-                Save changes
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={handleClick}
+              >
+                Update Note
               </button>
             </div>
           </div>
