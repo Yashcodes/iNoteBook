@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,8 +20,11 @@ const Login = () => {
     const json = await response.json();
     console.log(json);
 
+    //! Validating whether the user has logined or not
     if (json.success === true) {
       //* As user login successfully , save the authToken and redirect
+      localStorage.setItem("token", json.authtoken);
+      navigate("/");
     } else {
       alert("Invalid Credentials");
     }
