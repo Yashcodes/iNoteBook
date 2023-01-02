@@ -35,7 +35,7 @@ const SignUp = (props) => {
     //! Validating whether the user with specific email already exists or not
     if (json.success) {
       //* As user crea successfully , save the authToken and redirect
-      localStorage.setItem("token", json.authtoken);
+      localStorage.setItem("token", json.authToken);
       navigate("/");
       props.showAlert("Account Created Successfully", "success");
     } else {
