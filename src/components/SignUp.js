@@ -46,7 +46,7 @@ const SignUp = (props) => {
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
-
+ 
   return (
     <div className="container">
       <h2 className="mt-1 mb-4">Create an account to use iNoteBook</h2>
