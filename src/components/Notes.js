@@ -33,7 +33,6 @@ const Notes = () => {
 
   const handleClick = (e) => {
     refClose.current.click();
-    console.log("Updating the note", note);
     editNote(note.id, note.etitle, note.edescription, note.etag);
   };
 
@@ -90,6 +89,8 @@ const Notes = () => {
                     aria-describedby="emailHelp"
                     onChange={handleOnChange}
                     value={note.etitle}
+                    minLength={4}
+                    required
                   />
                 </div>
                 <div className="mb-3">
@@ -103,6 +104,8 @@ const Notes = () => {
                     name="edescription"
                     onChange={handleOnChange}
                     value={note.edescription}
+                    minLength={5}
+                    required
                   />
                 </div>
 
@@ -117,6 +120,8 @@ const Notes = () => {
                     name="etag"
                     onChange={handleOnChange}
                     value={note.etag}
+                    minLength={4}
+                    required
                   />
                 </div>
               </form>
@@ -134,6 +139,9 @@ const Notes = () => {
                 type="button"
                 className="btn btn-primary"
                 onClick={handleClick}
+                disabled={
+                  note.etitle.length < 4 || note.edescription.length < 5
+                }
               >
                 Update Note
               </button>
@@ -145,6 +153,9 @@ const Notes = () => {
       {/* //! Notes content */}
       <div className="row p-0">
         <h1 className="my-4">Your Notes</h1>
+        <div className="container">
+          {notes.length === 0 && "No notes to display"}
+        </div>
         {notes.map((note) => {
           return (
             <NoteItem key={note._id} updateNote={updateNote} note={note} />

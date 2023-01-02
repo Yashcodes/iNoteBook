@@ -16,7 +16,7 @@ const NoteState = (props) => {
       method: "GET",
       headers: {
         "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM5ZjU5NmU4NjkzMTE5YWQ4ZjUzMjY5In0sImlhdCI6MTY3MTM4NzUxNn0.LLfF2jk--h1s3JKat_IGkjUZchHeT10aE2MLaHI7Uzc",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNhYzVkN2NhYWRjYTE2YTYzYmQ1ZjM5In0sImlhdCI6MTY3MjI0MDUxMX0.XmP3ORxdaBE66g6zuqXFYyRPhyvKU6W4sA2HD-Q3dkc",
       },
     });
 
@@ -33,22 +33,12 @@ const NoteState = (props) => {
       headers: {
         "Content-Type": "application/json",
         "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM5ZjU5NmU4NjkzMTE5YWQ4ZjUzMjY5In0sImlhdCI6MTY3MTM4NzUxNn0.LLfF2jk--h1s3JKat_IGkjUZchHeT10aE2MLaHI7Uzc",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNhYzVkN2NhYWRjYTE2YTYzYmQ1ZjM5In0sImlhdCI6MTY3MjI0MDUxMX0.XmP3ORxdaBE66g6zuqXFYyRPhyvKU6W4sA2HD-Q3dkc",
       },
       body: JSON.stringify({ title, description, tag }),
     });
 
-    // const json = response.json();
-
-    const note = {
-      _id: "63a5f7486541f5d7cf547675",
-      user: "639f596e8693119ad8f53269",
-      title: title,
-      description: description,
-      tag: tag,
-      date: "2022-12-23T18:45:28.547Z",
-      __v: 0,
-    };
+    const note = await response.json();
 
     setNotes(notes.concat(note));
   };
@@ -63,7 +53,7 @@ const NoteState = (props) => {
       headers: {
         "Content-Type": "application/json",
         "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM5ZjU5NmU4NjkzMTE5YWQ4ZjUzMjY5In0sImlhdCI6MTY3MTM4NzUxNn0.LLfF2jk--h1s3JKat_IGkjUZchHeT10aE2MLaHI7Uzc",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNhYzVkN2NhYWRjYTE2YTYzYmQ1ZjM5In0sImlhdCI6MTY3MjI0MDUxMX0.XmP3ORxdaBE66g6zuqXFYyRPhyvKU6W4sA2HD-Q3dkc",
       },
     });
 
@@ -84,7 +74,7 @@ const NoteState = (props) => {
       headers: {
         "Content-Type": "application/json",
         "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM5ZjU5NmU4NjkzMTE5YWQ4ZjUzMjY5In0sImlhdCI6MTY3MTM4NzUxNn0.LLfF2jk--h1s3JKat_IGkjUZchHeT10aE2MLaHI7Uzc",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNhYzVkN2NhYWRjYTE2YTYzYmQ1ZjM5In0sImlhdCI6MTY3MjI0MDUxMX0.XmP3ORxdaBE66g6zuqXFYyRPhyvKU6W4sA2HD-Q3dkc",
       },
       body: JSON.stringify({ title, description, tag }),
     });
