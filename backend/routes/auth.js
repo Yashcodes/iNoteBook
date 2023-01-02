@@ -24,20 +24,22 @@ router.post(
   ],
   async (req, res) => {
     console.log(req.body);
+    let success = false;
 
     //* Validation error resolve : If there are errors, return Bad request and the errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({ success, errors: errors.array() });
     }
 
     //! Check whether the user with this email exists already
     try {
       let user = await User.findOne({ email: req.body.email });
       if (user) {
-        return res
-          .status(400)
-          .json({ error: "Sorry, a user with this email already exists" });
+        return res.status(400).json({
+          success,
+          error: "Sorry, a user with this email already exists",
+        });
       }
 
       //* Tut 49 : Hashing the password using bcryptjs
@@ -64,7 +66,8 @@ router.post(
       console.log("token is : " + authToken);
 
       // res.json(user); //* Sending response to work fine
-      res.json({ authToken });
+      success = true;
+      res.json({ success, authToken });
 
       //! Catch errors to make app to not crash
     } catch (error) {
