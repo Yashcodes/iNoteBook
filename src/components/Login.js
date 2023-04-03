@@ -18,7 +18,6 @@ const Login = (props) => {
       }),
     });
     const json = await response.json();
-    console.log(json);
 
     //! Validating whether the user has logined or not
     if (json.success === true) {

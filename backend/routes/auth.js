@@ -23,7 +23,6 @@ router.post(
     }),
   ],
   async (req, res) => {
-    console.log(req.body);
     let success = false;
 
     //* Validation error resolve : If there are errors, return Bad request and the errors
@@ -63,7 +62,6 @@ router.post(
       };
 
       const authToken = jwt.sign(data, JWT_SECRET); //* authToken = authentication token to validate user from the server and database :::: Acts synchronously
-      console.log("token is : " + authToken);
 
       // res.json(user); //* Sending response to work fine
       success = true;
@@ -130,7 +128,6 @@ router.post(
       success = true;
       res.send({ success, authToken });
     } catch (error) {
-      console.log(error.message);
       res.status(500).send("Internal Server Error");
     }
   }
@@ -144,7 +141,6 @@ router.post("/getuser", fetchUser, async (req, res) => {
     const user = await User.findById(userId).select("-password");
     res.send(user);
   } catch (error) {
-    console.log(error.message);
     res.status(500).send("Internal Server Error");
   }
 });

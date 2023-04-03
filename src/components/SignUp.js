@@ -30,7 +30,6 @@ const SignUp = (props) => {
     });
 
     const json = await response.json();
-    console.log(json);
 
     //! Validating whether the user with specific email already exists or not
     if (json.success) {
